@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今日要事</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background-image: url(https://www.midorg.com/bg.jpg);
+        background-size: cover;
+        background-position: center;
+      }
+      div {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      input {
+        border: 0;
+        border-bottom: 2px solid #fff;
+        padding: 4px 2px;
+        background: 0;
+        line-height: 1.5;
+        outline: none;
+        text-align: center;
+        transition: border-color 0.2s ease-in-out;
+        border-radius: 0;
+        color: #fff;
+        font-size: 2.5rem;
+        max-width: 90%;
+      }
+      input::placeholder {
+        font-size: 2.5rem;
+        color: rgba(255, 255, 255, 0.6);
+      }
+      span {
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        font-size: 30px;
+        margin-left: -25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input id="shuru" placeholder="今日要事" />
+      <span onclick="change()" id="button">✔</span>
+    </div>
+    <script>
+      let a = true;
+      function change() {
+        let button = document.getElementById("button");
+        let shuru = document.getElementById("shuru");
+        if (a) {
+          a = false;
+          button.innerText = "✘";
+          shuru.style.borderBottomColor = "transparent";
+          window.localStorage.setItem("shuju", shuru.value);
+          shuru.readOnly = true;
+        } else {
+          a = true;
+          button.innerText = "✔";
+          shuru.value = "";
+          shuru.style.borderBottomColor = "#fff";
+          window.localStorage.removeItem("shuju");
+          shuru.readOnly = false;
+        }
+      }
+      let hhh = window.localStorage.getItem("shuju");
+      if (hhh) {
+        document.getElementById("shuru").value = hhh;
+        change();
+      }
+    </script>
+  </body>
+</html>
